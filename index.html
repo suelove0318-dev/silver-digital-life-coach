@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실버 디지털 라이프 코치</title>
+  <link href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'NanumSquare', sans-serif;
+      background-color: #F0F8F5;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #F0F8F5;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 20px 0;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0077B6;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links button {
+      background: none;
+      border: none;
+      color: #0077B6;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'NanumSquare', sans-serif;
+    }
+
+    .nav-links button:hover {
+      font-weight: bold;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #0077B6;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .mobile-nav button {
+      background: none;
+      border: none;
+      color: #0077B6;
+      font-size: 18px;
+      text-align: left;
+      padding: 10px 0;
+      cursor: pointer;
+      font-family: 'NanumSquare', sans-serif;
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: #0077B6;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 40px;
+      color: #0077B6;
+      line-height: 1.6;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    h3 {
+      font-size: 28px;
+      color: #0077B6;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 20px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 150px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .hero p {
+      font-size: 24px;
+      margin-bottom: 50px;
+    }
+
+    .cta-button {
+      background-color: #FFC300;
+      color: white;
+      font-size: 24px;
+      padding: 20px 40px;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+      font-family: 'NanumSquare', sans-serif;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Grid Layouts */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .card .icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .highlight-box {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      border-left: 8px solid #0077B6;
+      margin-top: 30px;
+    }
+
+    .highlight-box.yellow {
+      border-left-color: #FFC300;
+    }
+
+    /* Solution Cards */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .solution-card {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .icon-circle {
+      width: 100px;
+      height: 100px;
+      background-color: #e6f4fa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+      font-size: 48px;
+    }
+
+    /* Benefits */
+    .benefit-item {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: start;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .number-badge {
+      width: 60px;
+      height: 60px;
+      background-color: #0077B6;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 900px;
+      margin: 50px auto;
+    }
+
+    .pricing-card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      border: 2px solid #0077B6;
+      text-align: center;
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      border: 4px solid #FFC300;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    .badge {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #FFC300;
+      color: white;
+      padding: 8px 24px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .price {
+      font-size: 48px;
+      color: #0077B6;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .old-price {
+      font-size: 20px;
+      color: #999;
+      text-decoration: line-through;
+    }
+
+    .discount-badge {
+      display: inline-block;
+      background-color: #FFC300;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    /* Background Colors */
+    .bg-white {
+      background-color: white;
+      padding: 100px 20px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #F0F8F5;
+      border-top: 2px solid #e0e0e0;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .mobile-nav.active {
+        display: flex;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+
+      h3 {
+        font-size: 22px;
+      }
+
+      p {
+        font-size: 18px;
+      }
+
+      .cta-button {
+        font-size: 20px;
+        padding: 15px 30px;
+      }
+
+      .benefit-item {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">실버 디지털 라이프 코치</div>
+      <div class="nav-links">
+        <button onclick="scrollToSection('problem')">문제</button>
+        <button onclick="scrollToSection('solution')">솔루션</button>
+        <button onclick="scrollToSection('benefits')">혜택</button>
+        <button onclick="scrollToSection('trust')">신뢰</button>
+        <button onclick="scrollToSection('pricing')">가격</button>
+        <button onclick="scrollToSection('cta')">신청</button>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+      <div class="mobile-nav" id="mobileNav">
+        <button onclick="scrollToSection('problem')">문제</button>
+        <button onclick="scrollToSection('solution')">솔루션</button>
+        <button onclick="scrollToSection('benefits')">혜택</button>
+        <button onclick="scrollToSection('trust')">신뢰</button>
+        <button onclick="scrollToSection('pricing')">가격</button>
+        <button onclick="scrollToSection('cta')">신청</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <h1>"키오스크 앞에서 망설이는 1분,<br>이제 자신감으로 바뀝니다."</h1>
+    <h2>6070 부모님의 디지털 일상을 위한<br>1:1 현장 맞춤 코칭</h2>
+    <p>복잡한 디지털 기기 사용, 더 이상 불편하거나 외롭지 않도록!<br>
+    노년층의 눈높이에 맞춘 따뜻하고 확실한 현장 코칭을 시작하세요.</p>
+    <button class="cta-button" onclick="scrollToSection('cta')">무료 상담 신청하기 →</button>
+  </section>
+
+  <!-- Problem Section -->
+  <section id="problem" class="bg-white">
+    <h2 style="text-align: center;">"어디를 가도 '기계'부터 만나는 세상,<br>혹시 우리 부모님만 뒤처지고 있나요?"</h2>
+    
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">🍽️</div>
+        <h3>식당에서 주문할 때</h3>
+        <p>복잡한 키오스크 앞에서 뭘 눌러야 할지 몰라 뒤돌아 나오신 적은 없으신가요?</p>
+      </div>
+      
+      <div class="card">
+        <div class="icon">🏥</div>
+        <h3>마트나 병원에서</h3>
+        <p>'QR코드'나 '모바일 앱'을 요구할 때마다 당황하여 도움을 요청해야 했던 순간</p>
+      </div>
+      
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>일상의 작은 즐거움</h3>
+        <p>손주들과 영상 통화는 하고 싶지만, 스마트폰의 기능을 켜는 것조차 어렵게 느껴집니다</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>😢 가장 큰 불편함</h3>
+      <p style="font-size: 24px; font-style: italic;">"어딜 가도 키오스크나 QR코드를 써야 해서 일상생활에서 큰 문제점을 경험합니다. 자식들에게 물어보기엔 미안하고, 학원은 너무 딱딱하고 어렵습니다."</p>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section id="solution">
+    <h2 style="text-align: center;">실버 디지털 라이프 코치</h2>
+    <p style="text-align: center; font-size: 28px; margin-bottom: 50px;">가장 필요한 곳, 가장 편안한 방식으로 해결합니다</p>
+
+    <div class="solution-grid">
+      <div class="solution-card">
+        <div class="icon-circle">📍</div>
+        <h3>1:1 현장 맞춤 코칭</h3>
+        <p>복지관에서 배운 지식이 아니라, 당장 내 눈앞의 키오스크 사용법, 모바일 뱅킹 접속 등 '지금 필요한 것'만 집중적으로 알려드립니다</p>
+      </div>
+
+      <div class="solution-card">
+        <div class="icon-circle">💚</div>
+        <h3>높은 공감 능력</h3>
+        <p>따뜻하게 다가가는 성격과 높은 공감 능력을 바탕으로, 쉬운 용어와 눈높이에 맞춘 속도로 불안함 없이 학습할 수 있습니다</p>
+      </div>
+
+      <div class="solution-card">
+        <div class="icon-circle">👥</div>
+        <h3>'함께'의 가치</h3>
+        <p>단순히 사용법을 가르치는 것이 아닌, 디지털 기기를 통해 얻을 수 있는 일상의 편리함과 자신감을 선물하여 삶의 질을 높여드립니다</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section id="benefits" class="bg-white">
+    <h2 style="text-align: center;">"단 3회 만에 달라지는<br>부모님의 디지털 라이프"</h2>
+
+    <div>
+      <div class="benefit-item">
+        <div class="number-badge">1</div>
+        <div>
+          <h3>🔍 맞춤형 진단 및 커리큘럼</h3>
+          <p>사전 설문을 통해 가장 시급하게 필요한 항목(키오스크, 모바일 앱, SNS, 금융 앱 등)을 파악하여 100% 맞춤형 코칭을 설계합니다</p>
+        </div>
+      </div>
+
+      <div class="benefit-item">
+        <div class="number-badge">2</div>
+        <div>
+          <h3>🏡 고객 맞춤형 공간 코칭</h3>
+          <p>고객님이 가장 편안하고, 가장 자주 이용하시는 현장으로 코치가 직접 방문하여 교육 효과를 극대화합니다</p>
+        </div>
+      </div>
+
+      <div class="benefit-item">
+        <div class="number-badge">3</div>
+        <div>
+          <h3>💪 반복 학습 및 자신감 키우기</h3>
+          <p>디지털 기기 사용의 '두려움'을 없애는 것에 초점을 맞춥니다. 천천히, 그리고 반복적으로 학습하여 스스로 할 수 있다는 자신감을 회복시켜 드립니다</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Section -->
+  <section id="trust">
+    <h2 style="text-align: center;">지역 사회와 함께 만들어가는<br>신뢰의 코칭</h2>
+
+    <div class="grid-3" style="margin-bottom: 50px;">
+      <div class="card">
+        <div class="icon">🏆</div>
+        <h3>MVP 검증 계획</h3>
+        <p>현재 지역 경로당 노인을 대상으로 무료 교육을 진행하여 실제 사용자의 니즈와 수용도를 확인하고 있습니다</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">✅</div>
+        <h3>주요 협력 기관</h3>
+        <p style="margin-bottom: 15px;">🤝 지역 내 노인복지관</p>
+        <p>🤝 구청 디지털 접근성 개선 프로젝트</p>
+      </div>
+    </div>
+
+    <div class="highlight-box yellow">
+      <h3>코치 김세현의 약속</h3>
+      <p style="font-size: 24px;">"다양한 학생들의 눈높이에 맞추어 가르쳐 온 저의 핵심 전문성을 바탕으로, 고객 한 분 한 분에게 따뜻함과 확실한 성장을 약속드립니다."</p>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="bg-white">
+    <h2 style="text-align: center;">초기 베타 테스터 특별 혜택!</h2>
+    <p style="text-align: center; font-size: 28px; margin-bottom: 50px;">선착순 30명 한정</p>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>기본 코스</h3>
+        <div class="old-price">정가: 50,000원</div>
+        <div class="price">39,000원</div>
+        <p>1회 / 60분</p>
+        <div class="discount-badge">약 22% 할인</div>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="badge">추천!</div>
+        <h3>집중 코스 (3회 패키지)</h3>
+        <div class="old-price">정가: 150,000원</div>
+        <div class="price">99,000원</div>
+        <p>3회 / 60분</p>
+        <div class="discount-badge">약 34% 할인</div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 50px;">
+      <p style="margin-bottom: 15px;">✓ 베타 특가는 3회 패키지 신청 시, 가장 큰 할인율이 적용됩니다</p>
+      <p>✓ 코칭 시간은 고객의 집중도를 고려하여 60분 단위로 운영됩니다</p>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section id="cta" style="text-align: center;">
+    <h2>더 이상 망설이지 마세요.<br>부모님의 일상에 자신감을 선물하세요.</h2>
+    <p style="font-size: 24px; margin-bottom: 50px;">디지털 격차는 세대 간의 단절로 이어질 수 있습니다.<br>
+    <strong>실버 디지털 라이프 코치</strong>가 그 간극을 따뜻하게 메워드립니다.<br>
+    지금 바로 신청하고, 부모님의 환한 미소를 되찾아 주세요.</p>
+    
+    <button class="cta-button" style="font-size: 28px; padding: 25px 50px;">
+      📞 초기 베타 테스터 신청하고 특별 할인받기 →
+    </button>
+
+    <p style="margin-top: 30px; font-size: 20px;">무료 상담 문의 환영합니다</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p style="font-size: 22px; color: #0077B6; margin-bottom: 15px;"><strong>실버 디지털 라이프 코치</strong></p>
+    <p style="font-size: 18px; color: #777;">따뜻함과 신뢰로 만드는 디지털 세상</p>
+  </footer>
+
+  <script>
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('mobileNav').classList.remove('active');
+      }
+    }
+
+    function toggleMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('active');
+    }
+
+    // 페이지 로드 시 다운로드 버튼 자동 생성
+    window.addEventListener('DOMContentLoaded', function() {
+      const downloadBtn = document.createElement('button');
+      downloadBtn.textContent = '📥 HTML 파일 다운로드';
+      downloadBtn.style.cssText = `
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #0077B6;
+        color: white;
+        border: none;
+        padding: 15px 25px;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        z-index: 1000;
+        font-family: 'NanumSquare', sans-serif;
+        transition: all 0.3s;
+      `;
+      
+      downloadBtn.onmouseover = function() {
+        this.style.transform = 'scale(1.05)';
+        this.style.boxShadow = '0 6px 20px rgba(0,0,0,0.4)';
+      };
+      
+      downloadBtn.onmouseout = function() {
+        this.style.transform = 'scale(1)';
+        this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+      };
+      
+      downloadBtn.onclick = function() {
+        const htmlContent = document.documentElement.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = '실버디지털라이프코치_랜딩페이지.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      };
+      
+      document.body.appendChild(downloadBtn);
+    });
+  </script>
+</body>
+</html>
